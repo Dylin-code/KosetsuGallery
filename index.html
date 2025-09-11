@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini IG-Style Gallery</title>
+  <meta name="description" content="A single-file, IG-style image gallery with multi-tag filtering, lazy-loading, and a floating lightbox. Perfect for GitHub Pages."/>
+
+  <style>
+    :root{
+      --bg:#0f0f10;
+      --card:#111214;
+      --muted:#a1a1aa;
+      --text:#f5f5f6;
+      --chip:#1a1b1e;
+      --chip-active:#2563eb;
+      --accent:#60a5fa;
+      --border:#222327;
+      --shadow: 0 6px 24px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:14px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    /* Top bar (simple IG-ish) */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:linear-gradient(to bottom, rgba(15,15,16,.9), rgba(15,15,16,.8));
+      backdrop-filter:saturate(160%) blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:10px 16px;
+      display:flex; align-items:center; gap:12px; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:700;
+      letter-spacing:.3px;
+    }
+    .brand .dot{ width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 24px rgba(96,165,250,.9);}
+    .hint{ color:var(--muted); font-size:12px }
+    
+    /* Controls */
+    .controls{
+      max-width:1100px; margin:10px auto 0; padding:0 16px 10px;
+      display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    }
+    .chip{
+      user-select:none; cursor:pointer; border:1px solid var(--border); background:var(--chip); color:var(--text);
+      padding:6px 10px; border-radius:999px; transition:transform .06s ease, background .15s ease;
+      display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+    }
+    .chip:hover{ transform:translateY(-1px) }
+    .chip.active{ background:var(--chip-active); border-color:transparent }
+    .chip[aria-pressed="true"]{ background:var(--chip-active) }
+    .chip .x{ font-weight:700; opacity:.85 }
+    .chip.reset{ background:#ef44441a; border-color:#ef44444a }
+    .chip.mode{ background:#22c55e1a; border-color:#22c55e4a }
+    .spacer{ flex:1 1 auto }
+    .count{ color:var(--muted); font-size:12px}
+
+    /* Grid */
+    .grid{
+      max-width:1100px; margin:6px auto 80px; padding:0 8px 0 12px; /* optical */
+      display:grid; gap:4px;
+      grid-template-columns:repeat(3, 1fr);
+    }
+    @media(min-width:640px){ .grid{ grid-template-columns:repeat(4, 1fr);} }
+    @media(min-width:1024px){ .grid{ grid-template-columns:repeat(6, 1fr);} }
+
+    .card{
+      position:relative; background:var(--card); border-radius:6px; overflow:hidden;
+      aspect-ratio:1/1; border:1px solid var(--border);
+    }
+    .card img{
+      width:100%; height:100%; object-fit:cover; display:block; filter:blur(12px); transform:scale(1.02);
+      transition:filter .35s ease, transform .4s ease;
+    }
+    .card img.ready{ filter:blur(0); transform:scale(1); }
+    .card .overlay{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(to bottom, rgba(0,0,0,.0), rgba(0,0,0,.35));
+      opacity:0; transition:opacity .2s ease;
+      font-weight:600; letter-spacing:.3px;
+    }
+    .card:hover .overlay{ opacity:1 }
+
+    /* Lightbox (floating overlay, no page change) */
+    .lightbox{
+      position:fixed; inset:0; z-index:100;
+      display:none; align-items:center; justify-content:center;
+      padding:24px;
+      background:rgba(0,0,0,.75);
+    }
+    .lightbox.open{ display:flex; }
+    .lb-inner{
+      position:relative; max-width:min(92vw, 1200px); max-height:86vh;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .lb-img{
+      max-width:100%; max-height:86vh; border-radius:10px; box-shadow:var(--shadow); 
+      border:1px solid var(--border); background:#0b0b0c;
+    }
+    .lb-close, .lb-prev, .lb-next{
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(17,17,18,.9); border:1px solid var(--border);
+      color:var(--text); padding:10px 12px; border-radius:10px; cursor:pointer; user-select:none;
+    }
+    .lb-close{ top:-10px; right:-10px; transform:none; font-size:20px; padding:8px 10px; border-radius:999px; }
+    .lb-prev{ left:-46px } .lb-next{ right:-46px }
+    @media(max-width:640px){ .lb-prev{ left:4px } .lb-next{ right:4px } }
+
+    .kbd{
+      font:12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background:#111; border:1px solid var(--border); padding:2px 6px; border-radius:6px; color:#ddd;
+    }
+
+    /* Footer note */
+    footer{ max-width:1100px; margin:20px auto 60px; padding:0 16px; color:var(--muted); font-size:12px }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Gallery</span>
+      </div>
+      <div class="hint">
+        點圖看大圖（<span class="kbd">Esc</span> 關閉，<span class="kbd">←</span>/<span class="kbd">→</span> 切換）
+      </div>
+    </div>
+  </header>
+
+  <section class="controls" id="controls">
+    <!-- Tags (auto-generated) -->
+    <button class="chip reset" id="resetBtn" title="清除所有篩選">還原</button>
+    <button class="chip mode" id="modeBtn" title="切換 ALL / ANY 篩選模式">Match: <strong id="modeLabel">ALL</strong></button>
+    <span class="spacer" aria-hidden="true"></span>
+    <div class="count"><span id="shownCount">0</span> / <span id="totalCount">0</span> 顯示</div>
+  </section>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer>
+    <p><strong>使用方式：</strong>把你的縮圖放到 <code>images/thumbs/</code>，大圖放到 <code>images/full/</code>，在下方 <code>IMAGES</code> 陣列填路徑與標籤即可。建議縮圖最長邊 300–600px，使用 WebP/AVIF；大圖控制在 300–500KB。所有縮圖已啟用 lazy-load 與模糊漸進顯示。</p>
+    <p>這個檔案是單一 HTML，無任何外部依賴，適合直接部署在 GitHub Pages。</p>
+  </footer>
+
+  <script>
+    /* ======== 1) 你的圖片清單（示例） ========
+       - thumb: 清單頁顯示的縮圖
+       - full : 點擊後顯示的大圖（若沒有可與 thumb 相同）
+       - tags : 多個字串標籤，用於篩選
+       TODO: 換成你的實際檔案路徑
+    */
+    const IMAGES = [
+      { thumb: "images/thumbs/p1thumb.jpg", full: "images/full/p1.jpg", tags: ["nature","water"], alt:"Forest river"},
+      { thumb: "images/thumbs/p2thumb.jpg", full: "images/full/p2.jpg", tags: ["animal","dog"], alt:"Dog"}
+    ];
+
+    /* ======== 2) 衍生所有標籤，建立篩選器 ======== */
+    const allTags = Array.from(
+      IMAGES.reduce((set, img) => { (img.tags||[]).forEach(t => set.add(t)); return set; }, new Set())
+    ).sort((a,b)=> a.localeCompare(b));
+    const selected = new Set();           // 當前選取的 tags
+    let matchAll = true;                  // true=ALL(且), false=ANY(或)
+
+    const grid = document.getElementById('grid');
+    const controls = document.getElementById('controls');
+    const resetBtn = document.getElementById('resetBtn');
+    const modeBtn  = document.getElementById('modeBtn');
+    const modeLabel= document.getElementById('modeLabel');
+    const shownCountEl = document.getElementById('shownCount');
+    const totalCountEl = document.getElementById('totalCount');
+
+    function makeChip(tag){
+      const btn = document.createElement('button');
+      btn.className='chip';
+      btn.type='button';
+      btn.textContent = `#${tag}`;
+      btn.setAttribute('aria-pressed','false');
+      btn.dataset.tag=tag;
+      btn.addEventListener('click', ()=>{
+        if(selected.has(tag)){ selected.delete(tag); btn.setAttribute('aria-pressed','false'); btn.classList.remove('active');}
+        else { selected.add(tag); btn.setAttribute('aria-pressed','true'); btn.classList.add('active');}
+        updateFilter();
+      });
+      return btn;
+    }
+
+    // 插入 tags chips（reset/mode 按鈕右邊）
+    const frag = document.createDocumentFragment();
+    allTags.forEach(t => frag.appendChild(makeChip(t)));
+    controls.insertBefore(frag, controls.querySelector('.spacer'));
+
+    // 切換 ALL/ANY 模式
+    modeBtn.addEventListener('click', ()=>{
+      matchAll = !matchAll;
+      modeLabel.textContent = matchAll ? 'ALL' : 'ANY';
+      updateFilter();
+    });
+
+    // 還原
+    resetBtn.addEventListener('click', ()=>{
+      selected.clear();
+      document.querySelectorAll('.chip[aria-pressed]').forEach(el => { el.setAttribute('aria-pressed','false'); el.classList.remove('active'); });
+      if(!matchAll){ matchAll=true; modeLabel.textContent='ALL'; }
+      updateFilter();
+    });
+
+    /* ======== 3) 建立卡片（IG-style 方形） ======== */
+    const cards = IMAGES.map((img, idx)=>{
+      const card = document.createElement('button');
+      card.type='button';
+      card.className='card';
+      card.dataset.tags=(img.tags||[]).join(',');
+      card.dataset.index=String(idx);
+      const image = document.createElement('img');
+      image.alt = img.alt || (img.tags||[]).join(', ') || 'photo';
+      image.loading='lazy';
+      image.decoding='async';
+      image.dataset.src = img.thumb || img.full; // lazy src
+      card.appendChild(image);
+
+      const ov = document.createElement('div');
+      ov.className='overlay';
+      ov.textContent='點擊放大';
+      card.appendChild(ov);
+
+      card.addEventListener('click', ()=> openLightbox(idx));
+      return card;
+    });
+    grid.append(...cards);
+    totalCountEl.textContent = String(cards.length);
+
+    /* ======== 4) 檢視過濾 ======== */
+    function isMatch(tagsCsv){
+      if(selected.size === 0) return true;
+      const tags = tagsCsv ? tagsCsv.split(',') : [];
+      if(matchAll){
+        for(const s of selected){ if(!tags.includes(s)) return false; }
+        return true;
+      }else{
+        for(const s of selected){ if(tags.includes(s)) return true; }
+        return false;
+      }
+    }
+    function updateFilter(){
+      let shown=0;
+      for(const c of cards){
+        const ok = isMatch(c.dataset.tags);
+        c.style.display = ok ? '' : 'none';
+        if(ok) shown++;
+      }
+      shownCountEl.textContent = String(shown);
+    }
+    updateFilter();
+
+    /* ======== 5) Lazy load + blur-up ======== */
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          const img = e.target;
+          const src = img.dataset.src;
+          if(src && !img.dataset.loaded){
+            img.src = src;
+            img.addEventListener('load', ()=>{
+              img.classList.add('ready');
+              img.dataset.loaded='1';
+            }, {once:true});
+          }
+          io.unobserve(img);
+        }
+      }
+    }, { rootMargin:'200px 0px' });
+    document.querySelectorAll('.card img').forEach(img => io.observe(img));
+
+    /* ======== 6) Lightbox（浮層，不跳頁） ======== */
+    let lbIndex = -1;
+    const lb = document.createElement('div');
+    lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true');
+    lb.innerHTML = `
+      <div class="lb-inner">
+        <img class="lb-img" alt="">
+        <button class="lb-close" title="關閉">✕</button>
+        <button class="lb-prev" title="上一張">⟨</button>
+        <button class="lb-next" title="下一張">⟩</button>
+      </div>`;
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector('.lb-img');
+    const btnClose = lb.querySelector('.lb-close');
+    const btnPrev = lb.querySelector('.lb-prev');
+    const btnNext = lb.querySelector('.lb-next');
+
+    function showIndex(i){
+      lbIndex = (i + IMAGES.length) % IMAGES.length;
+      const item = IMAGES[lbIndex];
+      lbImg.src = item.full || item.thumb;
+      lbImg.alt = item.alt || (item.tags||[]).join(', ');
+    }
+    function openLightbox(i){
+      showIndex(i);
+      lb.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeLightbox(){
+      lb.classList.remove('open');
+      document.body.style.overflow='';
+      lbImg.src='';
+    }
+    function prev(){ showIndex(lbIndex-1) }
+    function next(){ showIndex(lbIndex+1) }
+
+    btnClose.addEventListener('click', closeLightbox);
+    btnPrev.addEventListener('click', prev);
+    btnNext.addEventListener('click', next);
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      else if(e.key === 'ArrowLeft') prev();
+      else if(e.key === 'ArrowRight') next();
+    });
+  </script>
+</body>
+</html>
