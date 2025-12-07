@@ -98,23 +98,34 @@
       background:rgba(0,0,0,.75);
     }
     .lightbox.open{ display:flex; }
-    .lb-inner{ position:relative; max-width:min(92vw, 1200px); max-height:86vh; display:flex; align-items:center; justify-content:center; }
-    .lb-img{ max-width:100%; max-height:86vh; border-radius:10px; box-shadow:var(--shadow); border:1px solid var(--border); background:#0b0b0c; }
+    .lb-inner{
+      position:relative;
+      max-width:min(92vw, 1200px);
+      max-height:86vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+    .lb-img{
+      max-width:100%;
+      max-height:72vh;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+      background:#0b0b0c;
+    }
     .lb-info{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:8px;
-      min-width:180px;
+      width:100%;
       background:rgba(17,17,18,.92);
       color:var(--muted);
       font-size:15px;
-      border-radius:8px;
-      padding:8px 16px 6px 16px;
+      border-radius:10px;
+      padding:10px 16px 8px 16px;
       box-shadow:0 2px 12px rgba(0,0,0,.18);
-      pointer-events:none;
-      z-index:10;
       text-align:center;
+      pointer-events:none;
     }
     .lb-close, .lb-prev, .lb-next{
       position:absolute; top:50%; transform:translateY(-50%);
@@ -297,7 +308,7 @@
     lb.innerHTML = `
       <div class="lb-inner">
         <img class="lb-img" alt="">
-        <div class="lb-info" style="margin-top:16px; text-align:center; color:var(--muted); font-size:15px;"></div>
+        <div class="lb-info"></div>
         <button class="lb-close" title="關閉">✕</button>
         <button class="lb-prev" title="上一張">⟨</button>
         <button class="lb-next" title="下一張">⟩</button>
