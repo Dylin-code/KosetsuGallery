@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,20 @@
   <meta name="description" content="專業漢服、和服租賃與造型攝影工作室。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* Hero Section */
     .hero {
       height: 90vh;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('../images/full/69e3e8fc-6153-4140-ab21-b9e5b2865f5c.png') no-repeat center center/cover;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('../images/full/69e3e8fc-6153-4140-ab21-b9e5b2865f5c.png') no-repeat center center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       position: relative;
     }
-    
+
     .hero-content {
       max-width: 800px;
       padding: 2rem;
@@ -32,9 +33,9 @@
       font-weight: 300;
       margin-bottom: 1rem;
       letter-spacing: 0.5rem;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
-    
+
     .hero p {
       font-size: 1.5rem;
       margin-bottom: 2.5rem;
@@ -43,8 +44,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Features Section */
@@ -52,27 +60,32 @@
       padding: 6rem 0;
       background: var(--bg-secondary);
     }
+
     .features h2 {
       font-size: 2.5rem;
       margin-bottom: 3rem;
       text-align: center;
       color: var(--accent);
     }
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
+
     .feature-card {
       padding: 2rem;
       border: 1px solid var(--border);
       text-align: center;
       transition: transform 0.3s, border-color 0.3s;
     }
+
     .feature-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent);
     }
+
     .feature-icon {
       font-size: 2.5rem;
       color: var(--primary);
@@ -83,13 +96,14 @@
     .cta-section {
       padding: 6rem 0;
       text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/full/e3a20681-7e24-459a-84cd-179c6de5d63d.jpg') no-repeat center center/cover;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/full/e3a20681-7e24-459a-84cd-179c6de5d63d.jpg') no-repeat center center/cover;
       background-attachment: fixed;
     }
   </style>
 </head>
+
 <body>
-  
+
   <header class="hero">
     <div class="hero-content">
       <h1>香雪花間</h1>
@@ -131,4 +145,5 @@
 
   <script src="js/main.js"></script>
 </body>
+
 </html>

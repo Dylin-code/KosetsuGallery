@@ -1,18 +1,24 @@
 :root {
   /* Chinese Ancient Style / Dark Ink Theme */
-  --bg: #1a1a1c;       /* Ink Black */
+  --bg: #1a1a1c;
+  /* Ink Black */
   --bg-secondary: #242426;
-  --text: #f0f0f2;     /* Silver White */
+  --text: #f0f0f2;
+  /* Silver White */
   --text-muted: #a0a0a5;
-  --primary: #8b0000;  /* Cinnabar Red */
-  --accent: #d4af37;   /* Gold */
+  --primary: #8b0000;
+  /* Cinnabar Red */
+  --accent: #d4af37;
+  /* Gold */
   --border: #333336;
-  
-  --font-serif: "Noto Serif SC", "Songti SC", serif;
-  --font-sans: system-ui, -apple-system, sans-serif;
+
+  --font-serif: "LXGW WenKai Mono TC", "Noto Serif SC", serif;
+  --font-sans: "LXGW WenKai Mono TC", system-ui, -apple-system, sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -24,7 +30,12 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   font-weight: normal;
   color: var(--text);
@@ -53,10 +64,21 @@ img {
   padding: 0 20px;
 }
 
-.text-center { text-align: center; }
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mt-4 { margin-top: 4rem; }
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mt-4 {
+  margin-top: 4rem;
+}
 
 /* Navigation */
 .navbar {
@@ -109,7 +131,8 @@ img {
   color: var(--text-muted);
 }
 
-.nav-links a.active, .nav-links a:hover {
+.nav-links a.active,
+.nav-links a:hover {
   color: var(--accent);
 }
 
