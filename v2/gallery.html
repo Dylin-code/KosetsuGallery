@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服裝型錄 | 香雪花間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .gallery-controls {
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 74px;
+            /* navbar height approx */
+            z-index: 90;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 99px;
+            cursor: pointer;
+            font-family: var(--font-serif);
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .gallery-card {
+            position: relative;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .gallery-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            letter-spacing: 2px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .lb-close,
+        .lb-prev,
+        .lb-next {
+            position: absolute;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem;
+            transition: color 0.2s;
+        }
+
+        .lb-close:hover,
+        .lb-prev:hover,
+        .lb-next:hover {
+            color: var(--accent);
+        }
+
+        .lb-close {
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .lb-prev {
+            left: 1rem;
+        }
+
+        .lb-next {
+            right: 1rem;
+        }
+
+        .lb-caption {
+            position: absolute;
+            bottom: 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 100px;"></div> <!-- Spacer for fixed nav -->
+
+    <header style="text-align:center; padding: 2rem 0;">
+        <h1>服裝型錄</h1>
+        <p style="color:var(--text-muted);">精選漢服與和服展示</p>
+    </header>
+
+    <section class="gallery-controls">
+        <div class="container" id="filterContainer">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <!-- JS will populate tags here -->
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lb-close">&times;</button>
+        <button class="lb-prev">&#10094;</button>
+        <button class="lb-next">&#10095;</button>
+        <img src="" alt="Gallery Image">
+        <div class="lb-caption"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/gallery.js"></script>
+</body>
+
+</html>

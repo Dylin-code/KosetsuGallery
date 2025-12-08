@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>預約諮詢 | 香雪花間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            padding: 6rem 0 2rem;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto 6rem;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 4px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>預約諮詢</h1>
+            <p style="color:var(--text-muted);">填寫下方表單，我們將盡快與您聯繫</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <form onsubmit="event.preventDefault(); alert('感謝您的預約！我們將盡快聯繫您。');">
+                <div class="form-group">
+                    <label class="form-label">姓名</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">聯絡電話</label>
+                    <input type="tel" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">預約日期</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">感興趣的方案</label>
+                    <select class="form-input">
+                        <option>單租體驗</option>
+                        <option>奢華妝造</option>
+                        <option>寫真套組</option>
+                        <option>其他諮詢</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">留言備註</label>
+                    <textarea class="form-textarea" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">送出預約</button>
+            </form>
+
+            <div class="mt-4 text-center" style="border-top:1px solid var(--border); padding-top:2rem;">
+                <h3>門市資訊</h3>
+                <p style="color:var(--text-muted);">地址：台北市大安區古風路101號</p>
+                <p style="color:var(--text-muted);">電話：02-2345-6789</p>
+                <p style="color:var(--text-muted);">營業時間：週二至週日 10:00 - 19:00</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

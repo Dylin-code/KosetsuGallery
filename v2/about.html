@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們 | 香雪花間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/full/a0f8f248-c7d4-45c2-8e92-aa767c915510.jpg') center/cover;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media(max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .story-img {
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>關於香雪花間</h1>
+            <p style="color:var(--text-muted);">一針一線，傳承千年風華</p>
+        </div>
+    </header>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="story-grid">
+                <div>
+                    <h2 style="color:var(--accent); margin-bottom:1.5rem;">品牌故事</h2>
+                    <p style="margin-bottom:1rem;">「香雪花間」成立於2023年，致力於推廣漢服與和服文化。我們相信，傳統服飾不僅僅是衣物，更是連接過去與現在的橋樑。</p>
+                    <p style="margin-bottom:1rem;">
+                        在這裡，每一件衣裳都經過精挑細選，來自十三余、七月夕等知名正版漢服品牌，以及日本京都直送的高級振袖。我們希望每位來訪的客人，都能在現代喧囂中，找到一份屬於自己的古典優雅。</p>
+                    <p>無論是宋制的清雅、唐制的華麗，還是明制的端莊，我們都能為您量身打造最合適的造型。</p>
+                </div>
+                <img src="../images/full/ea2131b3-e836-4e41-8914-32e2bf78e594.jpg" alt="漢服展示" class="story-img">
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

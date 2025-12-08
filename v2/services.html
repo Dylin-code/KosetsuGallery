@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服務與價格 | 香雪花間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/full/69e3e8fc-6153-4140-ab21-b9e5b2865f5c.png') center/cover;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .price-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card:hover {
+            border-color: var(--accent);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin: 1rem 0;
+            font-family: var(--font-serif);
+        }
+
+        .unit {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--border);
+            color: var(--text-muted);
+        }
+
+        .features-list li::before {
+            content: "•";
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>服務方案</h1>
+            <p style="color:var(--text-muted);">透明的價格，極致的體驗</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="pricing-grid">
+            <!-- Plan 1 -->
+            <div class="price-card">
+                <h3>單租體驗</h3>
+                <div class="price">NT$ 800<span class="unit"> / 3小時</span></div>
+                <p>適合自行妝造，輕鬆體驗穿著樂趣</p>
+                <ul class="features-list">
+                    <li>全館漢服/和服任選一套</li>
+                    <li>含基本髮飾配件</li>
+                    <li>不含妝髮服務</li>
+                    <li>棚內自由拍攝</li>
+                </ul>
+                <a href="contact.html" class="btn">預約體驗</a>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="price-card">
+                <div
+                    style="position:absolute; top:0; right:0; background:var(--primary); color:#fff; padding:4px 12px; font-size:12px;">
+                    熱門推薦</div>
+                <h3>奢華妝造</h3>
+                <div class="price">NT$ 2,500<span class="unit"> / 次</span></div>
+                <p>完整造型服務，還原古風神韻</p>
+                <ul class="features-list">
+                    <li>全館漢服/和服任選一套</li>
+                    <li>專業古風妝容 + 複雜盤髮</li>
+                    <li>精美道具免費租借</li>
+                    <li>全天租借不限時（當日歸還）</li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary">立即預約</a>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="price-card">
+                <h3>寫真套組</h3>
+                <div class="price">NT$ 5,800<span class="unit"> / 起</span></div>
+                <p>包含攝影師的一條龍服務</p>
+                <ul class="features-list">
+                    <li>包含「奢華妝造」所有內容</li>
+                    <li>專業攝影師拍攝 1 小時</li>
+                    <li>精修照片 10 張</li>
+                    <li>底片全送</li>
+                </ul>
+                <a href="contact.html" class="btn">諮詢詳情</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
