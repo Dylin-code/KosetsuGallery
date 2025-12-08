@@ -3,7 +3,7 @@ const NAV_HTML = `
 <nav class="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="brand">
-      <div class="seal">香</div>
+      <img src="logo_small.png" alt="香雪花間" class="logo-small">
       <span>香雪花間</span>
     </a>
     <div class="nav-links">
@@ -21,8 +21,7 @@ const FOOTER_HTML = `
 <footer>
   <div class="container">
     <div class="brand">
-      <div class="seal" style="display:inline-flex; vertical-align:middle; margin-right:8px;">香</div>
-      <span style="vertical-align:middle;">香雪花間</span>
+      <img src="logo.png" alt="香雪花間" class="logo-full" style="height:60px;">
     </div>
     <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
     <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted);">
@@ -33,28 +32,28 @@ const FOOTER_HTML = `
 `;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject Nav and Footer if placeholders exist, or prepend/append
-    // However, simpler to just inject into body if we want consistent layout, 
-    // but to avoid FOUC (Flash of Unstyled Content), hardcoding in HTML is better for production.
-    // For this v2 prototype, injecting is fine for speed and consistency.
+  // Inject Nav and Footer if placeholders exist, or prepend/append
+  // However, simpler to just inject into body if we want consistent layout, 
+  // but to avoid FOUC (Flash of Unstyled Content), hardcoding in HTML is better for production.
+  // For this v2 prototype, injecting is fine for speed and consistency.
 
-    const body = document.body;
+  const body = document.body;
 
-    // Inject Nav at top
-    const headerPlaceholder = document.createElement('div');
-    headerPlaceholder.innerHTML = NAV_HTML;
-    body.insertBefore(headerPlaceholder.firstElementChild, body.firstChild);
+  // Inject Nav at top
+  const headerPlaceholder = document.createElement('div');
+  headerPlaceholder.innerHTML = NAV_HTML;
+  body.insertBefore(headerPlaceholder.firstElementChild, body.firstChild);
 
-    // Inject Footer at bottom
-    const footerPlaceholder = document.createElement('div');
-    footerPlaceholder.innerHTML = FOOTER_HTML;
-    body.appendChild(footerPlaceholder.firstElementChild);
+  // Inject Footer at bottom
+  const footerPlaceholder = document.createElement('div');
+  footerPlaceholder.innerHTML = FOOTER_HTML;
+  body.appendChild(footerPlaceholder.firstElementChild);
 
-    // Highlight active link
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
+  // Highlight active link
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active');
+    }
+  });
 });

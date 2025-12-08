@@ -12,8 +12,8 @@
   /* Gold */
   --border: #333336;
 
-  --font-serif: "LXGW WenKai Mono TC", "Noto Serif SC", serif;
-  --font-sans: "LXGW WenKai Mono TC", system-ui, -apple-system, sans-serif;
+  --font-serif: "Songti SC", "Noto Serif SC", serif;
+  --font-sans: "Songti SC", system-ui, -apple-system, sans-serif;
 }
 
 *,
@@ -98,26 +98,26 @@ img {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 2px;
   color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.brand .seal {
-  width: 24px;
-  height: 24px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: 4px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logo-small {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-full {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav-links {
