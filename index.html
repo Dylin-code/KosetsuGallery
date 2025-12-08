@@ -316,7 +316,7 @@
       lbImg.alt = item.alt || (item.tags||[]).join(', ');
       // 顯示替代文字和標籤
       let tags = (item.tags && item.tags.length) ? item.tags.map(t=>`<span style='background:var(--chip);color:var(--text);border-radius:8px;padding:2px 8px;margin:0 2px;'>#${t}</span>`).join('') : '<span style="color:var(--muted);">無標籤</span>';
-      let alt = item.alt ? `<span style='font-weight:500;'>${item.alt}</span>` : '<span style="color:var(--muted);">無替代文字</span>';
+      let alt = item.alt ? `<span style='font-weight:500;'>${item.alt}</span>` : '<span style="color:var(--muted);"></span>';
       lbInfo.innerHTML = `${alt}<br>${tags}`;
     }
     function openLightbox(i){
