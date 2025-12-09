@@ -21,7 +21,7 @@ const FOOTER_HTML = `
 <footer>
   <div class="container">
     <div class="brand">
-      <img src="logo.png" alt="香雪花間" class="logo-full" style="height:60px;">
+      <img src="logo.png" alt="香雪花間" class="logo-full" style="height:120px;">
     </div>
     <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
     <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted);">
