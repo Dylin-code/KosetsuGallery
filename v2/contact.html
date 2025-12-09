@@ -54,46 +54,36 @@
     <header class="page-header">
         <div class="container">
             <h1>預約諮詢</h1>
-            <p style="color:var(--text-muted);">填寫下方表單，我們將盡快與您聯繫</p>
         </div>
     </header>
 
     <div class="container">
-        <div class="form-container">
-            <form onsubmit="event.preventDefault(); alert('感謝您的預約！我們將盡快聯繫您。');">
-                <div class="form-group">
-                    <label class="form-label">姓名</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">聯絡電話</label>
-                    <input type="tel" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">預約日期</label>
-                    <input type="date" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">感興趣的方案</label>
-                    <select class="form-input">
-                        <option>單租體驗</option>
-                        <option>奢華妝造</option>
-                        <option>寫真套組</option>
-                        <option>其他諮詢</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">留言備註</label>
-                    <textarea class="form-textarea" rows="4"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%">送出預約</button>
-            </form>
+        <div class="form-container" style="text-align: center;">
+            <p style="margin-bottom: 2rem; color: var(--text-muted);">
+                請透過 Facebook 或 Instagram 私訊預約，我們將由專人為您服務。
+            </p>
 
-            <div class="mt-4 text-center" style="border-top:1px solid var(--border); padding-top:2rem;">
-                <h3>門市資訊</h3>
-                <p style="color:var(--text-muted);">地址：台北市大安區古風路101號</p>
-                <p style="color:var(--text-muted);">電話：02-2345-6789</p>
-                <p style="color:var(--text-muted);">營業時間：週二至週日 10:00 - 19:00</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap;">
+                <a href="https://www.facebook.com/kosetsuhanama" target="_blank" class="btn btn-primary">
+                    Facebook 粉絲專頁
+                </a>
+                <a href="https://www.instagram.com/kosetsuhanama/" target="_blank" class="btn btn-primary">
+                    Instagram 官方帳號
+                </a>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <img src="kosetsuhanama_qr.png" alt="Scan QR Code"
+                    style="max-width: 200px; margin: 0 auto; border: 1px solid var(--border); padding: 10px; background: #fff;">
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">掃描 QR Code 關注我們</p>
+            </div>
+
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <h3>其他聯絡資訊</h3>
+                <p style="color:var(--text-muted); margin-top: 1rem;">
+                    因為工作室採預約制，請務必提前私訊確認。<br>
+                    任何合作邀約也歡迎透過社群平台聯繫。
+                </p>
             </div>
         </div>
     </div>

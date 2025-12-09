@@ -25,7 +25,7 @@ const FOOTER_HTML = `
     </div>
     <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
     <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted);">
-      <a href="#">Instagram</a> • <a href="#">Twitter</a> • <a href="#">Weibo</a>
+      <a href="https://www.instagram.com/kosetsuhanama/">Instagram</a> • <a href="https://www.facebook.com/kosetsuhanama">Facebook</a> 
     </p>
   </div>
 </footer>
