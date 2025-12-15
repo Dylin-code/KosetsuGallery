@@ -10,7 +10,7 @@ const NAV_HTML = `
       <a href="index.html">首頁</a>
       <a href="about.html">關於我們</a>
       <a href="gallery.html">服裝型錄</a>
-      <a href="services.html">租賃服務</a>
+      <a href="services.html">服務方案</a>
       <a href="contact.html">預約諮詢</a>
     </div>
   </div>

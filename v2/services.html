@@ -2,135 +2,138 @@
 <html lang="zh-Hant">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服務與價格 | 香雪花間</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        .page-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/bg02.png') center/cover;
-            padding: 8rem 0 4rem;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拍攝方案 | 香雪花間</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-header {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/bg02.png') center/cover;
+      padding: 8rem 0 4rem;
+      text-align: center;
+    }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 0;
-        }
+    .page-intro {
+      padding: 3rem 0 1rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
 
-        .price-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+      padding: 2rem 0 4rem;
+    }
 
-        .price-card:hover {
-            border-color: var(--accent);
-        }
+    .plan-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
 
-        .price-card h3 {
-            font-size: 1.5rem;
-            color: var(--text);
-        }
+    .plan-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
 
-        .price {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin: 1rem 0;
-            font-family: var(--font-serif);
-        }
+    .plan-card a {
+      display: block;
+      color: inherit;
+    }
 
-        .unit {
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
+    .plan-card img {
+      width: 100%;
+      height: auto;
+    }
 
-        .features-list {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            text-align: left;
-        }
+    .plan-card figcaption {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-        .features-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed var(--border);
-            color: var(--text-muted);
-        }
+    .plan-name {
+      font-family: var(--font-serif);
+      color: var(--text);
+      letter-spacing: 1px;
+    }
 
-        .features-list li::before {
-            content: "•";
-            color: var(--accent);
-            margin-right: 0.5rem;
-        }
-    </style>
+    .plan-hint {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 820px) {
+      .plan-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header class="page-header">
-        <div class="container">
-            <h1>服務方案</h1>
-            <p style="color:var(--text-muted);">透明的價格，極致的體驗</p>
-        </div>
-    </header>
-
+  <header class="page-header">
     <div class="container">
-        <div class="pricing-grid">
-            <!-- Plan 1 -->
-            <div class="price-card">
-                <h3>單租體驗</h3>
-                <div class="price">NT$ 800<span class="unit"> / 3小時</span></div>
-                <p>適合自行妝造，輕鬆體驗穿著樂趣</p>
-                <ul class="features-list">
-                    <li>全館漢服/和服任選一套</li>
-                    <li>含基本髮飾配件</li>
-                    <li>不含妝髮服務</li>
-                    <li>棚內自由拍攝</li>
-                </ul>
-                <a href="contact.html" class="btn">預約體驗</a>
-            </div>
-
-            <!-- Plan 2 -->
-            <div class="price-card">
-                <div
-                    style="position:absolute; top:0; right:0; background:var(--primary); color:#fff; padding:4px 12px; font-size:12px;">
-                    熱門推薦</div>
-                <h3>奢華妝造</h3>
-                <div class="price">NT$ 2,500<span class="unit"> / 次</span></div>
-                <p>完整造型服務，還原古風神韻</p>
-                <ul class="features-list">
-                    <li>全館漢服/和服任選一套</li>
-                    <li>專業古風妝容 + 複雜盤髮</li>
-                    <li>精美道具免費租借</li>
-                    <li>全天租借不限時（當日歸還）</li>
-                </ul>
-                <a href="contact.html" class="btn btn-primary">立即預約</a>
-            </div>
-
-            <!-- Plan 3 -->
-            <div class="price-card">
-                <h3>寫真套組</h3>
-                <div class="price">NT$ 5,800<span class="unit"> / 起</span></div>
-                <p>包含攝影師的一條龍服務</p>
-                <ul class="features-list">
-                    <li>包含「奢華妝造」所有內容</li>
-                    <li>專業攝影師拍攝 1 小時</li>
-                    <li>精修照片 10 張</li>
-                    <li>底片全送</li>
-                </ul>
-                <a href="contact.html" class="btn">諮詢詳情</a>
-            </div>
-        </div>
+      <h1>拍攝方案</h1>
+      <p style="color:var(--text-muted);">點擊圖片可放大查看</p>
     </div>
+  </header>
 
-    <script src="js/main.js"></script>
+  <div class="container">
+    <p class="page-intro">以下為 4 種拍攝方案示意圖。</p>
+
+    <section class="plan-grid" aria-label="拍攝方案列表">
+      <figure class="plan-card">
+        <a href="img/plan1.jpg" target="_blank" rel="noopener">
+          <img src="img/plan1.jpg" alt="拍攝方案一" loading="lazy">
+        </a>
+        <figcaption>
+          <span class="plan-name">方案一</span>
+          <span class="plan-hint">點擊放大</span>
+        </figcaption>
+      </figure>
+
+      <figure class="plan-card">
+        <a href="img/plan2.jpg" target="_blank" rel="noopener">
+          <img src="img/plan2.jpg" alt="拍攝方案二" loading="lazy">
+        </a>
+        <figcaption>
+          <span class="plan-name">方案二</span>
+          <span class="plan-hint">點擊放大</span>
+        </figcaption>
+      </figure>
+
+      <figure class="plan-card">
+        <a href="img/plan3.jpg" target="_blank" rel="noopener">
+          <img src="img/plan3.jpg" alt="拍攝方案三" loading="lazy">
+        </a>
+        <figcaption>
+          <span class="plan-name">方案三</span>
+          <span class="plan-hint">點擊放大</span>
+        </figcaption>
+      </figure>
+
+      <figure class="plan-card">
+        <a href="img/plan4.jpg" target="_blank" rel="noopener">
+          <img src="img/plan4.jpg" alt="拍攝方案四" loading="lazy">
+        </a>
+        <figcaption>
+          <span class="plan-name">方案四</span>
+          <span class="plan-hint">點擊放大</span>
+        </figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>
