@@ -14,18 +14,67 @@
     /* Hero Section */
     .hero {
       height: 90vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('img/bg04.png') no-repeat center center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.75));
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg span {
+      position: absolute;
+      inset: 0;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      filter: saturate(0.95) contrast(1.05) brightness(0.85);
+      transform: scale(1.06);
+      opacity: 0;
+      animation: heroCrossfade 24s infinite, heroZoom 24s linear infinite;
+      will-change: opacity, transform;
+    }
+
+    .hero-bg .bg1 {
+      background-image: url('img/388841.jpg');
+      opacity: 1;
+    }
+
+    .hero-bg .bg2 {
+      background-image: url('img/388840.jpg');
+      animation-delay: 6s, 6s;
+    }
+
+    .hero-bg .bg3 {
+      background-image: url('img/388842.jpg');
+      animation-delay: 12s, 12s;
+    }
+
+    .hero-bg .bg4 {
+      background-image: url('img/388839.jpg');
+      animation-delay: 18s, 18s;
     }
 
     .hero-content {
       max-width: 800px;
       padding: 2rem;
       animation: fadeIn 1.5s ease-out;
+      position: relative;
+      z-index: 2;
     }
 
     .hero h1 {
@@ -52,6 +101,38 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes heroCrossfade {
+      0% {
+        opacity: 0;
+      }
+
+      4% {
+        opacity: 1;
+      }
+
+      21% {
+        opacity: 1;
+      }
+
+      25% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes heroZoom {
+      0% {
+        transform: scale(1.06);
+      }
+
+      100% {
+        transform: scale(1.12);
       }
     }
 
@@ -96,8 +177,27 @@
     .cta-section {
       padding: 6rem 0;
       text-align: center;
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/bg03.png') no-repeat center center/cover;
+      background: linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url('img/388841.jpg') no-repeat center 30%/cover;
       background-attachment: fixed;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg span {
+        animation: none;
+        opacity: 0;
+      }
+
+      .hero-bg .bg1 {
+        opacity: 1;
+      }
+
+      .hero-content {
+        animation: none;
+      }
+
+      .cta-section {
+        background-attachment: scroll;
+      }
     }
   </style>
 </head>
@@ -105,6 +205,12 @@
 <body>
 
   <header class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="bg1"></span>
+      <span class="bg2"></span>
+      <span class="bg3"></span>
+      <span class="bg4"></span>
+    </div>
     <div class="hero-content">
       <h1>香雪花間</h1>
       <p>穿梭千年的優雅，尋找屬於你的東方美學</p>
