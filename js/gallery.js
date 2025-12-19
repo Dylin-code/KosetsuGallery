@@ -1,5 +1,5 @@
 
-import { IMAGES } from './data.js';
+import { SITE_VERSION } from './version.js';
 
 const CATEGORY_CONFIG = {
     hanfu: {
@@ -33,14 +33,24 @@ let categoryImages = [];
 let currentFilter = 'all';
 let currentIndex = 0;
 let filteredImages = [];
+let IMAGES = [];
 
 function init() {
     setupLightbox();
     setupCategoryGate();
     decorateCategoryCards();
     setupToTop();
-    syncFromUrl({ replaceState: true });
+    loadDataAndStart().catch(() => {
+        // If data fails to load, keep the category gate visible.
+    });
+}
 
+async function loadDataAndStart() {
+    const mod = await import(`./data.js?v=${SITE_VERSION}`);
+    IMAGES = Array.isArray(mod.IMAGES) ? mod.IMAGES : [];
+
+    decorateCategoryCards();
+    syncFromUrl({ replaceState: true });
     window.addEventListener('popstate', () => syncFromUrl({ replaceState: true }));
 }
 

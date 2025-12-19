@@ -1,3 +1,5 @@
+import { SITE_VERSION } from './version.js';
+
 const PLAN_DATA = {
   'hanfu-classic': {
     dataPath: 'plans/hanfu-classic/data.js'
@@ -161,7 +163,7 @@ async function loadPlan(planKey) {
   if (!plan) return;
 
   const baseDir = plan.dataPath.split('/').slice(0, -1).join('/') + '/';
-  const module = await import(`../${plan.dataPath}`);
+  const module = await import(`../${plan.dataPath}?v=${SITE_VERSION}`);
 
   const title = module.TITLE || '成品展示';
   const subtitle = module.SUBTITLE || '點擊縮圖可放大查看';
@@ -198,4 +200,3 @@ document.addEventListener('DOMContentLoaded', () => {
   setupLightbox();
   setupPlanLinks();
 });
-
