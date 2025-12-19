@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function applyResponsiveNavLabels() {
-    const useShort = window.innerWidth < 430;
+    const useShort = window.innerWidth < 434;
     document.querySelectorAll('.nav-links a').forEach((link) => {
       const href = link.getAttribute('href') || '';
       if (!link.dataset.fullLabel) link.dataset.fullLabel = link.textContent || '';
