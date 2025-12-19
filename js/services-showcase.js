@@ -195,8 +195,17 @@ function setupPlanLinks() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+let started = false;
+function start() {
+  if (started) return;
+  started = true;
   setupModal();
   setupLightbox();
   setupPlanLinks();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', start);
+} else {
+  start();
+}

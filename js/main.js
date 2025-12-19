@@ -31,7 +31,7 @@ const FOOTER_HTML = `
 </footer>
 `;
 
-document.addEventListener('DOMContentLoaded', () => {
+function initLayout() {
   // Inject Nav and Footer if placeholders exist, or prepend/append
   // However, simpler to just inject into body if we want consistent layout, 
   // but to avoid FOUC (Flash of Unstyled Content), hardcoding in HTML is better for production.
@@ -81,4 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyResponsiveNavLabels();
   window.addEventListener('resize', applyResponsiveNavLabels, { passive: true });
-});
+}
+
+// Support both classic loading and module/dynamic imports (which may run after DOMContentLoaded).
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLayout);
+} else {
+  initLayout();
+}

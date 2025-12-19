@@ -335,4 +335,15 @@ function nextImage() {
     updateLightboxContent();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+let started = false;
+function start() {
+    if (started) return;
+    started = true;
+    init();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+} else {
+    start();
+}
