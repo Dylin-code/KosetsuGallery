@@ -56,4 +56,29 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active');
     }
   });
+
+  // Responsive labels: simplify on very small screens (<430px)
+  const shortLabels = {
+    'about.html': '關於',
+    'gallery.html': '型錄',
+    'services.html': '方案',
+    'contact.html': '諮詢'
+  };
+
+  function applyResponsiveNavLabels() {
+    const useShort = window.innerWidth < 430;
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      if (!link.dataset.fullLabel) link.dataset.fullLabel = link.textContent || '';
+
+      if (useShort && shortLabels[href]) {
+        link.textContent = shortLabels[href];
+      } else {
+        link.textContent = link.dataset.fullLabel;
+      }
+    });
+  }
+
+  applyResponsiveNavLabels();
+  window.addEventListener('resize', applyResponsiveNavLabels, { passive: true });
 });
