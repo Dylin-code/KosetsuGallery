@@ -70,9 +70,232 @@
       white-space: nowrap;
     }
 
+    /* Modal showcase */
+    .plan-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .plan-modal.open {
+      display: flex;
+    }
+
+    .plan-modal-panel {
+      width: min(1100px, 100%);
+      max-height: min(80vh, 820px);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .plan-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(26, 26, 28, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .plan-modal-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .plan-modal-title h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .plan-modal-title p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .plan-modal-close {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .plan-modal-close:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      color: var(--accent);
+    }
+
+    .plan-modal-body {
+      overflow: auto;
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-card {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .gallery-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay span {
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      letter-spacing: 2px;
+    }
+
+    .showcase-empty {
+      color: var(--text-muted);
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .lb-close,
+    .lb-prev,
+    .lb-next {
+      position: absolute;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      transition: color 0.2s;
+    }
+
+    .lb-close:hover,
+    .lb-prev:hover,
+    .lb-next:hover {
+      color: var(--accent);
+    }
+
+    .lb-close {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .lb-prev {
+      left: 1rem;
+    }
+
+    .lb-next {
+      right: 1rem;
+    }
+
+    .lb-caption {
+      position: absolute;
+      bottom: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: #ddd;
+    }
+
     @media (max-width: 820px) {
       .plan-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .plan-modal {
+        padding: 0.75rem;
+      }
+
+      .plan-modal-panel {
+        max-height: 86vh;
+      }
+
+      .showcase-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -83,7 +306,7 @@
   <header class="page-header">
     <div class="container">
       <h1>拍攝方案</h1>
-      <p style="color:var(--text-muted);">點擊圖片可放大查看</p>
+      <p style="color:var(--text-muted);">點擊方案可查看成品展示</p>
     </div>
   </header>
 
@@ -92,48 +315,73 @@
 
     <section class="plan-grid" aria-label="拍攝方案列表">
       <figure class="plan-card">
-        <a href="img/plan1.jpg" target="_blank" rel="noopener">
+        <a href="plans/hanfu-classic/index.html" data-plan="hanfu-classic">
           <img src="img/plan1.jpg" alt="單人漢服經典方案" loading="lazy">
         </a>
         <figcaption>
           <span class="plan-name">單人漢服經典方案</span>
-          <span class="plan-hint">點擊放大</span>
+          <span class="plan-hint">查看成品</span>
         </figcaption>
       </figure>
 
       <figure class="plan-card">
-        <a href="img/plan2.jpg" target="_blank" rel="noopener">
+        <a href="plans/couple-kimono/index.html" data-plan="couple-kimono">
           <img src="img/plan2.jpg" alt="情侶和服質感方案" loading="lazy">
         </a>
         <figcaption>
           <span class="plan-name">情侶和服質感方案</span>
-          <span class="plan-hint">點擊放大</span>
+          <span class="plan-hint">查看成品</span>
         </figcaption>
       </figure>
 
       <figure class="plan-card">
-        <a href="img/plan3.jpg" target="_blank" rel="noopener">
+        <a href="plans/han-wedding/index.html" data-plan="han-wedding">
           <img src="img/plan3.jpg" alt="漢婚服典雅方案" loading="lazy">
         </a>
         <figcaption>
           <span class="plan-name">漢婚服典雅方案</span>
-          <span class="plan-hint">點擊放大</span>
+          <span class="plan-hint">查看成品</span>
         </figcaption>
       </figure>
 
       <figure class="plan-card">
-        <a href="img/plan4.jpg" target="_blank" rel="noopener">
+        <a href="plans/studio-kimono/index.html" data-plan="studio-kimono">
           <img src="img/plan4.jpg" alt="和服棚拍優雅方案" loading="lazy">
         </a>
         <figcaption>
           <span class="plan-name">和服棚拍優雅方案</span>
-          <span class="plan-hint">點擊放大</span>
+          <span class="plan-hint">查看成品</span>
         </figcaption>
       </figure>
     </section>
   </div>
 
+  <div class="plan-modal" id="planModal" aria-hidden="true">
+    <div class="plan-modal-panel" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
+      <div class="plan-modal-header">
+        <div class="plan-modal-title">
+          <h2 id="planModalTitle">成品展示</h2>
+          <p id="planModalSubtitle">點擊縮圖可放大查看</p>
+        </div>
+        <button type="button" class="plan-modal-close" id="planModalClose" aria-label="關閉">&times;</button>
+      </div>
+      <div class="plan-modal-body">
+        <div class="showcase-grid" id="planShowcaseGrid"></div>
+        <div class="showcase-empty" id="planShowcaseEmpty" hidden>努力建置中，敬請期待。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close">&times;</button>
+    <button class="lb-prev">&#10094;</button>
+    <button class="lb-next">&#10095;</button>
+    <img src="" alt="Showcase Image">
+    <div class="lb-caption"></div>
+  </div>
+
   <script src="js/main.js"></script>
+  <script type="module" src="js/services-showcase.js"></script>
 </body>
 
 </html>

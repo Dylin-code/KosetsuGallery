@@ -2,8 +2,16 @@
 import { IMAGES } from './data.js';
 
 const CATEGORY_CONFIG = {
-    hanfu: { label: '漢服', tags: ['漢服', 'æ¼¢æ?'] },
-    kimono: { label: '和服', tags: ['和服', '?Œæ?'] }
+    hanfu: {
+        label: '漢服',
+        tags: ['漢服', 'æ¼¢æ?'],
+        inferredTags: ['戰國袍', '漢', '唐', '宋', '明', '漢元素']
+    },
+    kimono: {
+        label: '和服',
+        tags: ['和服', '?Œæ?'],
+        inferredTags: ['振袖', '訪問着', '訪問', '浴衣', '小紋', '袴', '打掛']
+    }
 };
 
 const HANFU_TAG_ORDER = ['戰國袍', '漢', '唐', '宋', '明', '男款', '其他'];
@@ -131,8 +139,22 @@ function getCategoryImages(category) {
     const config = CATEGORY_CONFIG[category];
     if (!config) return [];
 
-    const tagSet = new Set(config.tags);
-    return IMAGES.filter((img) => (img.tags || []).some((tag) => tagSet.has(tag)));
+    const explicitTags = new Set(config.tags);
+    const inferredTags = new Set(config.inferredTags || []);
+
+    const hasExplicitCategory = (img, cfg) =>
+        (img.tags || []).some((tag) => cfg.tags.includes(tag));
+
+    const hasAnyExplicitCategory = (img) =>
+        Object.values(CATEGORY_CONFIG).some((cfg) => hasExplicitCategory(img, cfg));
+
+    const isInCategory = (img) => {
+        if ((img.tags || []).some((tag) => explicitTags.has(tag))) return true;
+        if (hasAnyExplicitCategory(img)) return false;
+        return (img.tags || []).some((tag) => inferredTags.has(tag));
+    };
+
+    return sortImagesByOrder(IMAGES.filter(isInCategory));
 }
 
 function buildFilterBar() {
@@ -170,6 +192,22 @@ function buildFilterBar() {
             btn.addEventListener('click', () => setFilter(tag, btn));
             filterContainer.appendChild(btn);
         });
+}
+
+function sortImagesByOrder(images) {
+    return images
+        .map((img, originalIndex) => ({ img, originalIndex }))
+        .sort((a, b) => {
+            const orderA = Number(a.img?.order);
+            const orderB = Number(b.img?.order);
+            const hasA = Number.isFinite(orderA);
+            const hasB = Number.isFinite(orderB);
+
+            if (hasA && hasB && orderA !== orderB) return orderA - orderB;
+            if (hasA !== hasB) return hasA ? -1 : 1;
+            return a.originalIndex - b.originalIndex;
+        })
+        .map((x) => x.img);
 }
 
 function sortTagsForCategory(a, b, category) {
