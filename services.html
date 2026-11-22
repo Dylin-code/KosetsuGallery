@@ -1,386 +1,159 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>拍攝方案 | 香雪花間</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">  
-  <style>
-    .page-header {
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/bg02.png') center/cover;
-      padding: 8rem 0 4rem;
-      text-align: center;
-    }
-
-    .page-intro {
-      padding: 3rem 0 1rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    .plan-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2rem;
-      padding: 2rem 0 4rem;
-    }
-
-    .plan-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .plan-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .plan-card a {
-      display: block;
-      color: inherit;
-    }
-
-    .plan-card img {
-      width: 100%;
-      height: auto;
-    }
-
-    .plan-card figcaption {
-      padding: 1rem 1.25rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .plan-name {
-      font-family: var(--font-serif);
-      color: var(--text);
-      letter-spacing: 1px;
-    }
-
-    .plan-hint {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    /* Modal showcase */
-    .plan-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 1200;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-    }
-
-    .plan-modal.open {
-      display: flex;
-    }
-
-    .plan-modal-panel {
-      width: min(1100px, 100%);
-      max-height: min(80vh, 820px);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr;
-    }
-
-    .plan-modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(26, 26, 28, 0.85);
-      backdrop-filter: blur(8px);
-    }
-
-    .plan-modal-title {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      min-width: 0;
-    }
-
-    .plan-modal-title h2 {
-      margin: 0;
-      font-size: 1.35rem;
-      letter-spacing: 2px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .plan-modal-title p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .plan-modal-close {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.5rem;
-      line-height: 1;
-    }
-
-    .plan-modal-close:hover {
-      border-color: rgba(212, 175, 55, 0.55);
-      color: var(--accent);
-    }
-
-    .plan-modal-body {
-      overflow: auto;
-      padding: 1rem 1.25rem 1.25rem;
-    }
-
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery-card {
-      position: relative;
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      border-radius: 4px;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .gallery-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .gallery-card:hover img {
-      transform: scale(1.06);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-
-    .gallery-card:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    .gallery-overlay span {
-      border: 1px solid #fff;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      letter-spacing: 2px;
-    }
-
-    .showcase-empty {
-      color: var(--text-muted);
-      text-align: center;
-      padding: 3rem 0;
-    }
-
-    /* Lightbox */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 1300;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .lightbox.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border: 1px solid var(--border);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-    }
-
-    .lb-close,
-    .lb-prev,
-    .lb-next {
-      position: absolute;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 1rem;
-      transition: color 0.2s;
-    }
-
-    .lb-close:hover,
-    .lb-prev:hover,
-    .lb-next:hover {
-      color: var(--accent);
-    }
-
-    .lb-close {
-      top: 1rem;
-      right: 1rem;
-    }
-
-    .lb-prev {
-      left: 1rem;
-    }
-
-    .lb-next {
-      right: 1rem;
-    }
-
-    .lb-caption {
-      position: absolute;
-      bottom: 2rem;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      color: #ddd;
-    }
-
-    @media (max-width: 820px) {
-      .plan-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .plan-modal {
-        padding: 0.75rem;
-      }
-
-      .plan-modal-panel {
-        max-height: 86vh;
-      }
-
-      .showcase-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css?v=a05f1e416b">
+  <script type="importmap">{
+ "imports": {
+  "/assets/js/components/legacy-urls.js": "/assets/js/components/legacy-urls.js?v=914138ca13",
+  "/assets/js/components/lightbox-grid.js": "/assets/js/components/lightbox-grid.js?v=f4508f7ac6",
+  "/assets/js/components/lightbox.js": "/assets/js/components/lightbox.js?v=b1dd877da2",
+  "/assets/js/components/plan-modal.js": "/assets/js/components/plan-modal.js?v=6761947f74",
+  "/assets/js/components/tag-filter.js": "/assets/js/components/tag-filter.js?v=791ff409da",
+  "/assets/js/components/to-top.js": "/assets/js/components/to-top.js?v=645b7e5ce9",
+  "/assets/js/core/app.js": "/assets/js/core/app.js?v=10053b3b5a",
+  "/assets/js/main.js": "/assets/js/main.js?v=861663f87a"
+ }
+}</script>
+  
 </head>
-
-<body>
-
-  <header class="page-header">
-    <div class="container">
-      <h1>拍攝方案</h1>
-      <p style="color:var(--text-muted);">點擊方案可查看成品展示</p>
+<body data-page="services">
+<nav class="navbar" data-region="nav">
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <img src="/media/site/logo-small.webp" alt="香雪花間" class="logo-small">
+      <span>香雪花間</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">
+        <span class="nav-label-full">首頁</span>
+        <span class="nav-label-short">首頁</span>
+      </a>
+      <a href="/about.html">
+        <span class="nav-label-full">關於我們</span>
+        <span class="nav-label-short">關於</span>
+      </a>
+      <a href="/gallery.html">
+        <span class="nav-label-full">服裝型錄</span>
+        <span class="nav-label-short">型錄</span>
+      </a>
+      <a href="/services.html" class="active" aria-current="page">
+        <span class="nav-label-full">服務方案</span>
+        <span class="nav-label-short">方案</span>
+      </a>
+      <a href="/contact.html">
+        <span class="nav-label-full">預約諮詢</span>
+        <span class="nav-label-short">諮詢</span>
+      </a>
     </div>
-  </header>
-
+  </div>
+</nav>  <main id="main" data-region="main">
+<header class="page-header page-header--hero" style="--header-bg: url('/media/site/services-header.webp')">
   <div class="container">
-    <p class="page-intro">以下為 4 種拍攝方案示意圖。</p>
-
-    <section class="plan-grid" aria-label="拍攝方案列表">
-      <figure class="plan-card">
-        <a href="plans/hanfu-classic/index.html" data-plan="hanfu-classic">
-          <img src="img/plan1.jpg" alt="單人漢服經典方案" loading="lazy">
-        </a>
-        <figcaption>
-          <span class="plan-name">單人漢服經典方案</span>
-          <span class="plan-hint">查看成品</span>
-        </figcaption>
-      </figure>
-
-      <figure class="plan-card">
-        <a href="plans/couple-kimono/index.html" data-plan="couple-kimono">
-          <img src="img/plan2.jpg" alt="情侶和服質感方案" loading="lazy">
-        </a>
-        <figcaption>
-          <span class="plan-name">情侶和服質感方案</span>
-          <span class="plan-hint">查看成品</span>
-        </figcaption>
-      </figure>
-
-      <figure class="plan-card">
-        <a href="plans/han-wedding/index.html" data-plan="han-wedding">
-          <img src="img/plan3.jpg" alt="漢婚服典雅方案" loading="lazy">
-        </a>
-        <figcaption>
-          <span class="plan-name">漢婚服典雅方案</span>
-          <span class="plan-hint">查看成品</span>
-        </figcaption>
-      </figure>
-
-      <figure class="plan-card">
-        <a href="plans/studio-kimono/index.html" data-plan="studio-kimono">
-          <img src="img/plan4.jpg" alt="和服棚拍優雅方案" loading="lazy">
-        </a>
-        <figcaption>
-          <span class="plan-name">和服棚拍優雅方案</span>
-          <span class="plan-hint">查看成品</span>
-        </figcaption>
-      </figure>
-    </section>
+    <h1>拍攝方案</h1>
+    <p class="page-subtitle">點擊方案可查看成品展示</p>
   </div>
+</header>
+<div class="container">
+  <p class="page-intro">以下為 4 種拍攝方案示意圖。</p>
 
-  <div class="plan-modal" id="planModal" aria-hidden="true">
-    <div class="plan-modal-panel" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
-      <div class="plan-modal-header">
-        <div class="plan-modal-title">
-          <h2 id="planModalTitle">成品展示</h2>
-          <p id="planModalSubtitle">點擊縮圖可放大查看</p>
-        </div>
-        <button type="button" class="plan-modal-close" id="planModalClose" aria-label="關閉">&times;</button>
-      </div>
-      <div class="plan-modal-body">
-        <div class="showcase-grid" id="planShowcaseGrid"></div>
-        <div class="showcase-empty" id="planShowcaseEmpty" hidden>努力建置中，敬請期待。</div>
-      </div>
+  <section class="plan-grid" aria-label="拍攝方案列表">
+    <figure class="plan-card" data-plan-slug="hanfu-classic">
+      <a href="/plans/hanfu-classic/" data-plan="hanfu-classic">
+        <img src="/media/site/plan-hanfu-classic.webp" alt="單人漢服經典方案" loading="lazy">
+      </a>
+      <figcaption>
+        <span class="plan-name">單人漢服經典方案</span>
+        <span class="plan-hint">查看成品</span>
+      </figcaption>
+      <template class="plan-showcase" data-title="單人漢服經典方案" data-subtitle="成品展示集">
+<div class="showcase-grid" data-lightbox-grid>
+</div>
+<div class="showcase-empty">努力建置中，敬請期待。</div>
+      </template>
+    </figure>
+    <figure class="plan-card" data-plan-slug="couple-kimono">
+      <a href="/plans/couple-kimono/" data-plan="couple-kimono">
+        <img src="/media/site/plan-couple-kimono.webp" alt="情侶和服質感方案" loading="lazy">
+      </a>
+      <figcaption>
+        <span class="plan-name">情侶和服質感方案</span>
+        <span class="plan-hint">查看成品</span>
+      </figcaption>
+      <template class="plan-showcase" data-title="情侶和服質感方案" data-subtitle="成品展示集">
+<div class="showcase-grid" data-lightbox-grid>
+</div>
+<div class="showcase-empty">努力建置中，敬請期待。</div>
+      </template>
+    </figure>
+    <figure class="plan-card" data-plan-slug="han-wedding">
+      <a href="/plans/han-wedding/" data-plan="han-wedding">
+        <img src="/media/site/plan-han-wedding.webp" alt="漢婚服典雅方案" loading="lazy">
+      </a>
+      <figcaption>
+        <span class="plan-name">漢婚服典雅方案</span>
+        <span class="plan-hint">查看成品</span>
+      </figcaption>
+      <template class="plan-showcase" data-title="漢婚服典雅方案" data-subtitle="成品展示集">
+<div class="showcase-grid" data-lightbox-grid>
+</div>
+<div class="showcase-empty">努力建置中，敬請期待。</div>
+      </template>
+    </figure>
+    <figure class="plan-card" data-plan-slug="studio-kimono">
+      <a href="/plans/studio-kimono/" data-plan="studio-kimono">
+        <img src="/media/site/plan-studio-kimono.webp" alt="和服棚拍優雅方案" loading="lazy">
+      </a>
+      <figcaption>
+        <span class="plan-name">和服棚拍優雅方案</span>
+        <span class="plan-hint">查看成品</span>
+      </figcaption>
+      <template class="plan-showcase" data-title="和服棚拍優雅方案" data-subtitle="成品展示集">
+<div class="showcase-grid" data-lightbox-grid>
+</div>
+<div class="showcase-empty">努力建置中，敬請期待。</div>
+      </template>
+    </figure>
+  </section>
+</div>
+  </main>
+<footer class="site-footer" data-region="footer">
+  <div class="container">
+    <div class="brand">
+      <img src="/media/site/logo.webp" alt="香雪花間" class="logo-full logo-footer">
     </div>
+    <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
+    <p class="footer-links">
+      <a href="https://www.instagram.com/kosetsuhanama/">Instagram</a>
+<span class="footer-sep" aria-hidden="true">•</span>      <a href="https://www.facebook.com/kosetsuhanama">Facebook</a>
+    </p>
   </div>
-
-  <div class="lightbox" id="lightbox">
-    <button class="lb-close">&times;</button>
-    <button class="lb-prev">&#10094;</button>
-    <button class="lb-next">&#10095;</button>
-    <img src="" alt="Showcase Image">
-    <div class="lb-caption"></div>
+</footer>  <div data-region="overlays">
+<div class="plan-modal" id="planModal" data-component="plan-modal" aria-hidden="true">
+  <div class="plan-modal-panel" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
+    <div class="plan-modal-header">
+      <div class="plan-modal-title">
+        <h2 id="planModalTitle">成品展示</h2>
+        <p id="planModalSubtitle"></p>
+      </div>
+      <button type="button" class="plan-modal-close" aria-label="關閉">&times;</button>
+    </div>
+    <div class="plan-modal-body"></div>
   </div>
-
-  <script type="module" src="js/boot.js"></script>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="圖片檢視">
+  <button type="button" class="lb-close" aria-label="關閉">&times;</button>
+  <button type="button" class="lb-prev" aria-label="上一張">&#10094;</button>
+  <button type="button" class="lb-next" aria-label="下一張">&#10095;</button>
+  <img class="lb-image" alt="">
+  <div class="lb-caption"></div>
+</div>  </div>
+  <script type="module" src="/assets/js/main.js?v=861663f87a"></script>
+  
 </body>
-
 </html>

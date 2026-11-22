@@ -1,177 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>情侶和服質感方案 | 成品展示</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
-  <style>
-    .page-header {
-      padding: 6rem 0 2.5rem;
-      text-align: center;
-    }
-
-    .back-row {
-      padding: 1rem 0 0;
-      text-align: center;
-    }
-
-    .back-row a {
-      font-family: var(--font-serif);
-      letter-spacing: 2px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 2rem 0 3rem;
-    }
-
-    .gallery-card {
-      position: relative;
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      border-radius: 4px;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .gallery-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .gallery-card:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .gallery-card:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    .gallery-overlay span {
-      border: 1px solid #fff;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      letter-spacing: 2px;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .lightbox.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border: 1px solid var(--border);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-    }
-
-    .lb-close,
-    .lb-prev,
-    .lb-next {
-      position: absolute;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 1rem;
-      transition: color 0.2s;
-    }
-
-    .lb-close:hover,
-    .lb-prev:hover,
-    .lb-next:hover {
-      color: var(--accent);
-    }
-
-    .lb-close {
-      top: 1rem;
-      right: 1rem;
-    }
-
-    .lb-prev {
-      left: 1rem;
-    }
-
-    .lb-next {
-      right: 1rem;
-    }
-
-    .lb-caption {
-      position: absolute;
-      bottom: 2rem;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      color: #ddd;
-    }
-  </style>
+  <title>情侶和服質感方案 | 成品展示集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css?v=a05f1e416b">
+  <script type="importmap">{
+ "imports": {
+  "/assets/js/components/legacy-urls.js": "/assets/js/components/legacy-urls.js?v=914138ca13",
+  "/assets/js/components/lightbox-grid.js": "/assets/js/components/lightbox-grid.js?v=f4508f7ac6",
+  "/assets/js/components/lightbox.js": "/assets/js/components/lightbox.js?v=b1dd877da2",
+  "/assets/js/components/plan-modal.js": "/assets/js/components/plan-modal.js?v=6761947f74",
+  "/assets/js/components/tag-filter.js": "/assets/js/components/tag-filter.js?v=791ff409da",
+  "/assets/js/components/to-top.js": "/assets/js/components/to-top.js?v=645b7e5ce9",
+  "/assets/js/core/app.js": "/assets/js/core/app.js?v=10053b3b5a",
+  "/assets/js/main.js": "/assets/js/main.js?v=861663f87a"
+ }
+}</script>
+  
 </head>
-
-<body>
-  <div style="height: 100px;"></div>
-
-  <header class="page-header">
-    <div class="container">
-      <h1 id="showcaseTitle">成品展示</h1>
-      <p id="showcaseSubtitle" style="color:var(--text-muted);">成品展示集</p>
-      <div class="back-row">
-        <a id="showcaseBack" href="../../services.html">← 返回方案</a>
-      </div>
+<body data-page="plan">
+<nav class="navbar" data-region="nav">
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <img src="/media/site/logo-small.webp" alt="香雪花間" class="logo-small">
+      <span>香雪花間</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">
+        <span class="nav-label-full">首頁</span>
+        <span class="nav-label-short">首頁</span>
+      </a>
+      <a href="/about.html">
+        <span class="nav-label-full">關於我們</span>
+        <span class="nav-label-short">關於</span>
+      </a>
+      <a href="/gallery.html">
+        <span class="nav-label-full">服裝型錄</span>
+        <span class="nav-label-short">型錄</span>
+      </a>
+      <a href="/services.html" class="active" aria-current="page">
+        <span class="nav-label-full">服務方案</span>
+        <span class="nav-label-short">方案</span>
+      </a>
+      <a href="/contact.html">
+        <span class="nav-label-full">預約諮詢</span>
+        <span class="nav-label-short">諮詢</span>
+      </a>
     </div>
-  </header>
-
-  <section class="container">
-    <div class="gallery-grid" id="showcaseGrid"></div>
-  </section>
-
-  <div class="lightbox" id="lightbox">
-    <button class="lb-close">&times;</button>
-    <button class="lb-prev">&#10094;</button>
-    <button class="lb-next">&#10095;</button>
-    <img src="" alt="Showcase Image">
-    <div class="lb-caption"></div>
   </div>
+</nav>  <main id="main" data-region="main">
+<div class="page-spacer"></div>
+<header class="page-header page-header--plan">
+  <div class="container">
+    <h1>情侶和服質感方案</h1>
+    <p class="page-subtitle">成品展示集</p>
+    <div class="back-row">
+      <a href="/services.html">← 返回方案</a>
+    </div>
+  </div>
+</header>
 
-  <script type="module" src="../../js/boot.js"></script>
+<section class="container">
+<div class="gallery-grid" data-lightbox-grid>
+</div>
+<div class="showcase-empty">努力建置中，敬請期待。</div>
+</section>
+  </main>
+<footer class="site-footer" data-region="footer">
+  <div class="container">
+    <div class="brand">
+      <img src="/media/site/logo.webp" alt="香雪花間" class="logo-full logo-footer">
+    </div>
+    <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
+    <p class="footer-links">
+      <a href="https://www.instagram.com/kosetsuhanama/">Instagram</a>
+<span class="footer-sep" aria-hidden="true">•</span>      <a href="https://www.facebook.com/kosetsuhanama">Facebook</a>
+    </p>
+  </div>
+</footer>  <div data-region="overlays">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="圖片檢視">
+  <button type="button" class="lb-close" aria-label="關閉">&times;</button>
+  <button type="button" class="lb-prev" aria-label="上一張">&#10094;</button>
+  <button type="button" class="lb-next" aria-label="下一張">&#10095;</button>
+  <img class="lb-image" alt="">
+  <div class="lb-caption"></div>
+</div>  </div>
+  <script type="module" src="/assets/js/main.js?v=861663f87a"></script>
+  
 </body>
-
 </html>

@@ -1,77 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>關於我們 | 香雪花間</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-    <style>
-        .page-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/bg01.png') center/cover;
-            padding: 8rem 0 4rem;
-            text-align: center;
-        }
-
-        .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .content-section {
-            padding: 4rem 0;
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        @media(max-width: 768px) {
-            .story-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .story-img {
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於我們 | 香雪花間</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css?v=a05f1e416b">
+  <script type="importmap">{
+ "imports": {
+  "/assets/js/components/legacy-urls.js": "/assets/js/components/legacy-urls.js?v=914138ca13",
+  "/assets/js/components/lightbox-grid.js": "/assets/js/components/lightbox-grid.js?v=f4508f7ac6",
+  "/assets/js/components/lightbox.js": "/assets/js/components/lightbox.js?v=b1dd877da2",
+  "/assets/js/components/plan-modal.js": "/assets/js/components/plan-modal.js?v=6761947f74",
+  "/assets/js/components/tag-filter.js": "/assets/js/components/tag-filter.js?v=791ff409da",
+  "/assets/js/components/to-top.js": "/assets/js/components/to-top.js?v=645b7e5ce9",
+  "/assets/js/core/app.js": "/assets/js/core/app.js?v=10053b3b5a",
+  "/assets/js/main.js": "/assets/js/main.js?v=861663f87a"
+ }
+}</script>
+  
 </head>
-
-<body>
-
-    <header class="page-header">
-        <div class="container">
-            <h1>關於香雪花間</h1>
-            <p style="color:var(--text-muted);">一針一線，傳承千年風華</p>
+<body data-page="about">
+<nav class="navbar" data-region="nav">
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <img src="/media/site/logo-small.webp" alt="香雪花間" class="logo-small">
+      <span>香雪花間</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">
+        <span class="nav-label-full">首頁</span>
+        <span class="nav-label-short">首頁</span>
+      </a>
+      <a href="/about.html" class="active" aria-current="page">
+        <span class="nav-label-full">關於我們</span>
+        <span class="nav-label-short">關於</span>
+      </a>
+      <a href="/gallery.html">
+        <span class="nav-label-full">服裝型錄</span>
+        <span class="nav-label-short">型錄</span>
+      </a>
+      <a href="/services.html">
+        <span class="nav-label-full">服務方案</span>
+        <span class="nav-label-short">方案</span>
+      </a>
+      <a href="/contact.html">
+        <span class="nav-label-full">預約諮詢</span>
+        <span class="nav-label-short">諮詢</span>
+      </a>
+    </div>
+  </div>
+</nav>  <main id="main" data-region="main">
+<header class="page-header page-header--hero" style="--header-bg: url('/media/site/about-header.webp')">
+  <div class="container">
+    <h1>關於香雪花間</h1>
+    <p class="page-subtitle">一針一線，傳承千年風華</p>
+  </div>
+</header>
+<section class="content-section">
+  <div class="container">
+    <div class="story-grid">
+      <div>
+        <h2 class="story-title">品牌故事</h2>
+        <div class="story-body">
+          <p>「香雪花間」成立於 2020 年，緣起於店主盈盈對東方傳統服飾的深切熱愛。在快節奏的現代生活中，我們闢出了一方靜謐天地，讓時光在此緩步，讓古典美學在您身上甦醒。</p>
+          <p>我們深知，傳統服飾之美，不僅在於華服本身的精緻，更在於穿著禮法的嚴謹。店主盈盈持有專業「和服著付師」證照，堅持以正統、正規的技術，為您呈現和服最原本的莊重與優雅；同時亦精研漢服造型，從妝容到髮飾，無不細細考究，只為還原那份穿越千年的儀式感。</p>
+          <p>在這裡，拒絕廉價的複製品。館內每一件和服與漢服，皆是我們精心挑選的正品大牌。無論是來自日本的高級正絹，還是設計獨到的漢服名品，我們堅持以最好的質感，襯托獨一無二的您。</p>
+          <p>從造型設計、服裝出租，到專業攝影合作與活動出席，「香雪花間」致力於提供全方位的文化體驗。期盼您在香雪紛飛的花間，遇見那個最美的自己。</p>
         </div>
-    </header>
-
-    <section class="content-section">
-        <div class="container">
-            <div class="story-grid">
-                <div>
-                    <h2 style="color:var(--accent); margin-bottom:1.5rem;">品牌故事</h2>
-                    <p style="margin-bottom:1rem;">「香雪花間」成立於 2020
-                        年，緣起於店主盈盈對東方傳統服飾的深切熱愛。在快節奏的現代生活中，我們闢出了一方靜謐天地，讓時光在此緩步，讓古典美學在您身上甦醒。</p>
-                    <p style="margin-bottom:1rem;">
-                        我們深知，傳統服飾之美，不僅在於華服本身的精緻，更在於穿著禮法的嚴謹。店主盈盈持有專業「和服著付師」證照，堅持以正統、正規的技術，為您呈現和服最原本的莊重與優雅；同時亦精研漢服造型，從妝容到髮飾，無不細細考究，只為還原那份穿越千年的儀式感。
-                    </p>
-                    <p>在這裡，拒絕廉價的複製品。館內每一件和服與漢服，皆是我們精心挑選的正品大牌。無論是來自日本的高級正絹，還是設計獨到的漢服名品，我們堅持以最好的質感，襯托獨一無二的您。</p>
-                    <p>從造型設計、服裝出租，到專業攝影合作與活動出席，「香雪花間」致力於提供全方位的文化體驗。期盼您在香雪紛飛的花間，遇見那個最美的自己。</p>
-                </div>
-                <img src="img/ig_photo_01.jpeg" alt="漢服展示" class="story-img">
-            </div>
-        </div>
-    </section>
-
-  <script type="module" src="js/boot.js"></script>
+      </div>
+      <img src="/media/site/about-story.webp" alt="漢服展示" class="story-img">
+    </div>
+  </div>
+</section>
+  </main>
+<footer class="site-footer" data-region="footer">
+  <div class="container">
+    <div class="brand">
+      <img src="/media/site/logo.webp" alt="香雪花間" class="logo-full logo-footer">
+    </div>
+    <p>Copyright © 2025 Kosetsu Studio. All rights reserved.</p>
+    <p class="footer-links">
+      <a href="https://www.instagram.com/kosetsuhanama/">Instagram</a>
+<span class="footer-sep" aria-hidden="true">•</span>      <a href="https://www.facebook.com/kosetsuhanama">Facebook</a>
+    </p>
+  </div>
+</footer>  <div data-region="overlays">
+  </div>
+  <script type="module" src="/assets/js/main.js?v=861663f87a"></script>
+  
 </body>
-
 </html>
